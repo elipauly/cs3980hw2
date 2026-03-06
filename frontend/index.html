@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>us population data</title>
+    <!--<link rel="stylesheet" href="style.css"> -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    
+    <style>
+        h1 {
+            color: #6c0ee8;
+        }
+        body {
+            font-family: monospace;
+            margin: 2px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 50%;
+        }
+        th,td {
+            border: 2px solid #c9d3da;
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #c9d3da;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>US Population by year</h1>
+
+<table id="populationTable">
+<thead>
+<tr>
+    <th>Year</th>
+    <th>US Population</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+
+
+<script>
+(function(){
+const API_URL = "https://api.datausa.io/tesseract/data.jsonrecords?cube=acs_yg_total_population_5&measures=Population&drilldowns=Year";
+
+async function loadPopulation(){
+    try{
+        const response = await fetch(API_URL);
+        const data = await response.json();
+
+        let records = data.data;
+
+
+        const tableBody = document.querySelector("#populationTable tbody");
+
+        records.forEach(row => {
+            const tr = document.createElement("tr");
+
+            const year = document.createElement("td");
+            year.textContent = row.Year;
+
+            const population = document.createElement("td");
+            population.textContent = row.Population.toLocaleString();
+
+            tr.appendChild(year);
+            tr.appendChild(population);
+            tableBody.appendChild(tr);
+        });
+
+    }
+    catch(err){
+        console.error("Error loading data:", err);
+    }
+}
+
+window.addEventListener("load", loadPopulation);
+
+})();
+</script>
+
+</body>
+</html>

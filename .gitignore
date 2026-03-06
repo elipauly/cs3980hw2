@@ -1,0 +1,15 @@
+.env
+.envrc
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.DS_Store
+node_modules/
+/__pycache__/
+*.pyc
+.github/
+.git/
+xtodo_app_directory
