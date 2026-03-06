@@ -53,13 +53,9 @@ async function loadPopulation(){
         const data = await response.json();
 
         let records = data.data;
-
-
         const tableBody = document.querySelector("#populationTable tbody");
-
         records.forEach(row => {
             const tr = document.createElement("tr");
-
             const year = document.createElement("td");
             year.textContent = row.Year;
 
@@ -70,7 +66,6 @@ async function loadPopulation(){
             tr.appendChild(population);
             tableBody.appendChild(tr);
         });
-
     }
     catch(err){
         console.error("Error loading data:", err);
